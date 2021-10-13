@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:transport/ui/theme/app_colors.dart';
-import 'package:transport/ui/widgets/auth/auth_widget.dart';
+import 'package:transport/ui/widgets/auth/check_code_widget.dart';
 
-class WelcomeWidget extends StatelessWidget {
-  const WelcomeWidget({Key? key}) : super(key: key);
+class AuthWidget extends StatelessWidget {
+  const AuthWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +15,7 @@ class WelcomeWidget extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/background.png"),
-                fit: BoxFit.contain,
+                fit: BoxFit.scaleDown,
                 // colorFilter: ColorFilter.linearToSrgbGamma(),
               ),
             ),
@@ -28,7 +29,7 @@ class WelcomeWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text('Dushanbe Trans',
+                const Text('Регистрация',
                     style: TextStyle(
                         fontSize: 26,
                         fontStyle: FontStyle.normal,
@@ -37,7 +38,7 @@ class WelcomeWidget extends StatelessWidget {
                   height: 12,
                 ),
                 const Text(
-                    'Поможет найти транспорт и \nудобно спланировать маршрут',
+                    'Еще один шаг до самых быстрых\nпоездков в вашей жизни',
                     style: TextStyle(
                         fontSize: 17,
                         fontStyle: FontStyle.normal,
@@ -51,30 +52,58 @@ class WelcomeWidget extends StatelessWidget {
                   'Введите номер телефона',
                   style: TextStyle(
                       fontSize: 16,
-                      fontFamily: 'SanFrancisco-regular',
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white),
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                const Text(
+                  'Вам придёт смс с кодом подтверждения',
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
                       color: Colors.white),
                 ),
                 const SizedBox(
                   height: 24,
                 ),
                 FractionallySizedBox(
-                  widthFactor: 1,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: const Color(0x00F7F8F9).withOpacity(0.35),
-                      shadowColor: Colors.transparent,
-                      padding: const EdgeInsets.only(top: 23, bottom: 23),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16)),
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      'Что мы еще умеем?',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                ),
+                    widthFactor: 1,
+                    child: TextFormField(
+                      keyboardType: TextInputType.phone,
+                      autocorrect: false,
+                      style: TextStyle(
+                        color: AppColors.black,
+                      ),
+                      decoration: const InputDecoration(
+                        fillColor: Colors.white,
+                        labelText: 'Phone Number',
+                        hintText: 'Введите номер телефона',
+                        labelStyle: TextStyle(color: AppColors.backColor),
+                        prefixIcon: Icon(Icons.phone),
+                        prefix: Text(
+                          '+992 ',
+                          style: TextStyle(color: AppColors.blueBase),
+                        ),
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                          borderSide: BorderSide(width: 1, color: Colors.blue),
+                        ),
+                        focusColor: AppColors.white,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                          borderSide: BorderSide(width: 1, color: Colors.blue),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                        ),
+                      ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                    )),
                 const SizedBox(
                   height: 24,
                 ),
@@ -92,12 +121,12 @@ class WelcomeWidget extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) {
-                          return const AuthWidget();
+                          return const CheckCodeWidget();
                         }),
                       );
                     },
                     child: const Text(
-                      'Начать пользоваться',
+                      'Отправить код',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                     ),
