@@ -1,81 +1,84 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:transport/ui/theme/app_colors.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
 
-class ProfileWidget extends StatelessWidget {
+class ProfileWidget extends StatefulWidget {
   const ProfileWidget({Key? key}) : super(key: key);
+
+  @override
+  _ExampleState createState() => _ExampleState();
+}
+
+class _ExampleState extends State<ProfileWidget> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.w600, color: Colors.black);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Likes',
+      style: optionStyle,
+    ),
+    Text(
+      'Search',
+      style: optionStyle,
+    ),
+    Text(
+      'Profile',
+      style: optionStyle,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 11.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Flexible(
-              child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  padding: EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(9.0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.green,
-                          blurRadius: 3.0,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  child: Icon(Icons.map, color: Colors.white),
-                ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 20,
+        title: const Text('GoogleNavBar'),
+      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+          child: GNav(
+            rippleColor: Colors.grey[300]!,
+            hoverColor: Colors.grey[100]!,
+            gap: 8,
+            activeColor: Colors.black,
+            iconSize: 24,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            duration: const Duration(milliseconds: 400),
+            tabBackgroundColor: Colors.grey[100]!,
+            color: Colors.black,
+            tabs: [
+              GButton(
+                icon: LineIcons.home,
+                text: 'Home',
               ),
-            ),
-            Flexible(
-              child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  padding: EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(9.0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.blue,
-                          blurRadius: 3.0,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  child: Icon(Icons.star, color: Colors.white),
-                ),
+              GButton(
+                icon: LineIcons.heart,
+                text: 'Likes',
               ),
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  padding: EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: [Colors.orange, Colors.orangeAccent]),
-                    borderRadius: BorderRadius.circular(9.0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.orange,
-                          blurRadius: 3.0,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  child: Text(
-                    "Show Ticket",
-                    style: Theme.of(context).textTheme.button,
-                    // .apply(color: Colors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+              GButton(
+                icon: LineIcons.search,
+                text: 'Search',
               ),
-            )
-          ],
+              GButton(
+                icon: LineIcons.user,
+                text: 'Profile',
+              ),
+            ],
+            selectedIndex: _selectedIndex,
+            onTabChange: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+          ),
         ),
       ),
     );
