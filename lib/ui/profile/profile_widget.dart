@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:transport/ui/profile/profile_widget_modal.dart';
 
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({Key? key}) : super(key: key);
@@ -13,24 +14,38 @@ class _ExampleState extends State<ProfileWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600, color: Colors.black);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Home',
-      style: optionStyle,
-    ),
+  List<Widget> _widgetOptions = [
+    dragable(),
     Text(
       'Likes',
       style: optionStyle,
     ),
-    Text(
-      'Search',
-      style: optionStyle,
-    ),
+    HomePage(),
     Text(
       'Profile',
       style: optionStyle,
     ),
   ];
+  static DraggableScrollableSheet dragable() {
+    return DraggableScrollableSheet(
+      initialChildSize: 0.3,
+      minChildSize: 0.2,
+      maxChildSize: 0.6,
+      builder: (BuildContext context, ScrollController scrollController) {
+        return Container(
+          color: Colors.blue[100],
+          height: 300,
+          child: ListView.builder(
+            controller: scrollController,
+            itemCount: 3,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(title: Text('Item $index'));
+            },
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +69,7 @@ class _ExampleState extends State<ProfileWidget> {
             duration: const Duration(milliseconds: 400),
             tabBackgroundColor: Colors.grey[100]!,
             color: Colors.black,
-            tabs: [
+            tabs: const [
               GButton(
                 icon: LineIcons.home,
                 text: 'Home',
