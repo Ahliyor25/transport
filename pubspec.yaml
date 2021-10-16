@@ -41,6 +41,7 @@ dev_dependencies:
   google_nav_bar: ^5.0.5
   line_icons: ^2.0.1
   sliding_up_panel: ^2.0.0+1
+  yandex_mapkit: ^1.1.1
 
  
   flutter_lints: ^1.0.0
