@@ -3,9 +3,9 @@ import 'package:transport/ui/theme/app_colors.dart';
 
 abstract class AppButtonStyle {
   static final ButtonStyle linkButton = ElevatedButton.styleFrom(
-    primary: AppColors.blueBase,
+    primary: AppColors.pale,
     shadowColor: Colors.transparent,
-    padding: const EdgeInsets.only(top: 23, bottom: 23),
+    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 13),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
   );
 }

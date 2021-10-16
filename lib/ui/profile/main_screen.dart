@@ -56,10 +56,6 @@ class _ExampleState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 15,
-        title: const Text('GoogleNavBar'),
-      ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: SafeArea(
         child: Padding(

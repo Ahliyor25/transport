@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:transport/ui/theme/appButtonStyle.dart';
 import 'package:transport/ui/theme/app_colors.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   final double _initFabHeight = 120.0;
   double _fabHeight = 0;
   double _panelHeightOpen = 0;
-  final double _panelHeightClosed = 200.0;
+  final double _panelHeightClosed = 180.0;
 
   @override
   void initState() {
@@ -27,7 +29,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    _panelHeightOpen = MediaQuery.of(context).size.height * .80;
+    _panelHeightOpen = MediaQuery.of(context).size.height * .30;
 
     return Material(
       child: Stack(
@@ -38,7 +40,7 @@ class _HomePageState extends State<HomePage> {
             minHeight: _panelHeightClosed,
             parallaxEnabled: true,
             parallaxOffset: .5,
-            body: Text('ds'),
+            body: const YandexMap(),
             panelBuilder: (sc) => _panel(sc),
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16.0),
@@ -71,7 +73,7 @@ class _HomePageState extends State<HomePage> {
         context: context,
         removeTop: true,
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           controller: sc,
           children: <Widget>[
             const SizedBox(
@@ -93,10 +95,23 @@ class _HomePageState extends State<HomePage> {
             Row(
               children: <Widget>[
                 _text(),
-                
+                const Expanded(
+                    child: SizedBox(
+                  height: 5,
+                )),
+                ElevatedButton(
+                  style: AppButtonStyle.linkButton,
+                  onPressed: () {},
+                  child: const Text(
+                    'Пополнить',
+                    style: TextStyle(color: AppColors.blueBase, fontSize: 18),
+                  ),
+                )
               ],
             ),
-            const SizedBox(height: 36.0),
+            const SizedBox(height: 24.0),
+            const Text(
+                'Привяжите карты Dushanbe City\nи следите за остатком и легко пополняйте её')
           ],
         ));
   }
@@ -131,14 +146,17 @@ class _HomePageState extends State<HomePage> {
       children: const [
         Text('Баланс для поездок',
             style: TextStyle(
-                fontFamily: '', fontSize: 16, color: AppColors.black)),
+                fontFamily: '',
+                fontSize: 16,
+                color: AppColors.black,
+                fontWeight: FontWeight.w400)),
         SizedBox(
-          height: 10,
+          height: 5,
         ),
         Text(
           '256с',
           style: TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               fontFamily: 'SanFrancisco',
               fontWeight: FontWeight.w700,
               color: AppColors.blueBase),
