@@ -86,6 +86,7 @@ class AuthWidget extends StatelessWidget {
                           '+992 ',
                           style: TextStyle(color: AppColors.blueBase),
                         ),
+                        
                         filled: true,
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(16.0)),

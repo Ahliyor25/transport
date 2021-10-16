@@ -2,27 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:transport/ui/profile/profile_widget_modal.dart';
+import 'package:transport/ui/theme/app_colors.dart';
 
-class ProfileWidget extends StatefulWidget {
-  const ProfileWidget({Key? key}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   _ExampleState createState() => _ExampleState();
 }
 
-class _ExampleState extends State<ProfileWidget> {
+class _ExampleState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600, color: Colors.black);
   List<Widget> _widgetOptions = [
+    HomePage(),
     dragable(),
     Text(
       'Likes',
       style: optionStyle,
     ),
-    HomePage(),
     Text(
       'Profile',
+      style: optionStyle,
+    ),
+    Text(
+      'Ещё',
       style: optionStyle,
     ),
   ];
@@ -52,7 +57,7 @@ class _ExampleState extends State<ProfileWidget> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 20,
+        elevation: 15,
         title: const Text('GoogleNavBar'),
       ),
       body: _widgetOptions.elementAt(_selectedIndex),
@@ -62,29 +67,33 @@ class _ExampleState extends State<ProfileWidget> {
           child: GNav(
             rippleColor: Colors.grey[300]!,
             hoverColor: Colors.grey[100]!,
-            gap: 8,
-            activeColor: Colors.black,
-            iconSize: 24,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            gap: 5,
+            activeColor: Colors.white,
+            iconSize: 22,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
             duration: const Duration(milliseconds: 400),
-            tabBackgroundColor: Colors.grey[100]!,
-            color: Colors.black,
+            tabBackgroundColor: AppColors.blueBase,
+            color: AppColors.grey,
             tabs: const [
               GButton(
-                icon: LineIcons.home,
-                text: 'Home',
-              ),
-              GButton(
-                icon: LineIcons.heart,
-                text: 'Likes',
-              ),
-              GButton(
-                icon: LineIcons.search,
-                text: 'Search',
-              ),
-              GButton(
                 icon: LineIcons.user,
-                text: 'Profile',
+                text: 'Профиль',
+              ),
+              GButton(
+                icon: LineIcons.map,
+                text: 'Маршрут',
+              ),
+              GButton(
+                icon: LineIcons.bus,
+                text: 'Транспорт',
+              ),
+              GButton(
+                icon: LineIcons.bell,
+                text: 'Уведомления',
+              ),
+              GButton(
+                icon: LineIcons.alignJustify,
+                text: 'Еще',
               ),
             ],
             selectedIndex: _selectedIndex,

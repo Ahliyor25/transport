@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:transport/ui/profile/profile_widget.dart';
+import 'package:transport/ui/profile/main_screen.dart';
 import 'package:transport/ui/theme/app_colors.dart';
 
 class CheckCodeWidget extends StatelessWidget {
@@ -120,7 +120,7 @@ class CheckCodeWidget extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) {
-                          return const ProfileWidget();
+                          return const MainScreen();
                         }),
                       );
                     },
