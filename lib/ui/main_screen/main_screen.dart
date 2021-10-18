@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:transport/ui/profile/profile_widget_modal.dart';
+import 'package:transport/ui/main_screen/profile_widget_modal.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:transport/ui/theme/app_colors.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _ExampleState extends State<MainScreen> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600, color: Colors.black);
   List<Widget> _widgetOptions = [
-    HomePage(),
+    ProfileWidget(),
     dragable(),
     Text(
       'Likes',
@@ -26,10 +27,13 @@ class _ExampleState extends State<MainScreen> {
       'Profile',
       style: optionStyle,
     ),
-    Text(
-      'Ещё',
-      style: optionStyle,
-    ),
+    Column(
+      children: <Widget>[
+        Expanded(
+            child: Container(
+                padding: const EdgeInsets.all(8), child: const YandexMap())),
+      ],
+    )
   ];
   static DraggableScrollableSheet dragable() {
     return DraggableScrollableSheet(

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,18 +8,20 @@ import 'package:transport/ui/theme/appButtonStyle.dart';
 import 'package:transport/ui/theme/app_colors.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class ProfileWidget extends StatefulWidget {
+  const ProfileWidget({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _ProfileWidgetState createState() => _ProfileWidgetState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ProfileWidgetState extends State<ProfileWidget> {
+  late YandexMapController controller;
   final double _initFabHeight = 120.0;
   double _fabHeight = 0;
   double _panelHeightOpen = 0;
   final double _panelHeightClosed = 180.0;
+  
 
   @override
   void initState() {
@@ -31,38 +34,65 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     _panelHeightOpen = MediaQuery.of(context).size.height * .30;
 
-    return Material(
-      child: Stack(
-        alignment: Alignment.topCenter,
+    return Scaffold(
+      body: Column(
         children: <Widget>[
-          SlidingUpPanel(
-            maxHeight: _panelHeightOpen,
-            minHeight: _panelHeightClosed,
-            parallaxEnabled: true,
-            parallaxOffset: .5,
-            body: const YandexMap(),
-            panelBuilder: (sc) => _panel(sc),
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16.0),
-                topRight: Radius.circular(16.0)),
-            onPanelSlide: (double pos) => setState(() {
-              _fabHeight = pos * (_panelHeightOpen - _panelHeightClosed) +
-                  _initFabHeight;
-            }),
+          Expanded(
+              child: Container(
+            padding: const EdgeInsets.all(8),
+            child: YandexMap(
+              onMapCreated: (YandexMapController yandexMapController) async {
+                controller = yandexMapController;
+
+                await controller.move(
+                    point: const Point(latitude: 38.53575, longitude: 68.77905),
+                    animation: const MapAnimation(duration: 2),
+                    zoom: 11);
+                await yandexMapController.addPlacemark(
+                  Placemark(
+                      point:
+                          const Point(latitude: 38.53575, longitude: 68.77905),
+                      style: const PlacemarkStyle(
+                          iconName: 'assets/images/place.png', scale: 0.75)),
+                );
+              },
+            ),
+          )),
+          Material(
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: <Widget>[
+                SlidingUpPanel(
+                  maxHeight: _panelHeightOpen,
+                  minHeight: _panelHeightClosed,
+                  parallaxEnabled: true,
+                  parallaxOffset: .5,
+                  body: Text('dasd'),
+                  panelBuilder: (sc) => _panel(sc),
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(16.0),
+                      topRight: Radius.circular(16.0)),
+                  onPanelSlide: (double pos) => setState(() {
+                    _fabHeight = pos * (_panelHeightOpen - _panelHeightClosed) +
+                        _initFabHeight;
+                  }),
+                ),
+                // the fab
+                // Positioned(
+                //   right: 20.0,
+                //   bottom: _fabHeight + 100,
+                //   child: FloatingActionButton(
+                //     child: Icon(
+                //       Icons.gps_fixed,
+                //       color: Theme.of(context).primaryColor,
+                //     ),
+                //     onPressed: () {},
+                //     backgroundColor: Colors.white,
+                //   ),
+                // ),
+              ],
+            ),
           ),
-          // the fab
-          // Positioned(
-          //   right: 20.0,
-          //   bottom: _fabHeight + 100,
-          //   child: FloatingActionButton(
-          //     child: Icon(
-          //       Icons.gps_fixed,
-          //       color: Theme.of(context).primaryColor,
-          //     ),
-          //     onPressed: () {},
-          //     backgroundColor: Colors.white,
-          //   ),
-          // ),
         ],
       ),
     );
