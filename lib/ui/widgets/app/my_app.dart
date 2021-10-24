@@ -9,8 +9,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Transport Dushanbe',
+
       theme: ThemeData(
-        fontFamily: 'SanFrancisco',
+        fontFamily: 'TimesNewRoman',
         appBarTheme: const AppBarTheme(
           // backgroundColor: AppColors.backColor,
           color: Colors.transparent,

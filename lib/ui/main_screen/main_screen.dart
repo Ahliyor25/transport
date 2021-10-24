@@ -61,48 +61,46 @@ class _ExampleState extends State<MainScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-          child: GNav(
-            rippleColor: Colors.grey[300]!,
-            hoverColor: Colors.grey[100]!,
-            gap: 5,
-            activeColor: Colors.white,
-            iconSize: 22,
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            duration: const Duration(milliseconds: 400),
-            tabBackgroundColor: AppColors.blueBase,
-            color: AppColors.grey,
-            tabs: const [
-              GButton(
-                icon: LineIcons.user,
-                text: 'Профиль',
-              ),
-              GButton(
-                icon: LineIcons.map,
-                text: 'Маршрут',
-              ),
-              GButton(
-                icon: LineIcons.bus,
-                text: 'Транспорт',
-              ),
-              GButton(
-                icon: LineIcons.bell,
-                text: 'Уведомления',
-              ),
-              GButton(
-                icon: LineIcons.alignJustify,
-                text: 'Еще',
-              ),
-            ],
-            selectedIndex: _selectedIndex,
-            onTabChange: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-          ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+        child: GNav(
+          rippleColor: Colors.grey[300]!,
+          hoverColor: Colors.grey[100]!,
+          gap: 5,
+          activeColor: Colors.white,
+          iconSize: 22,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          duration: const Duration(milliseconds: 400),
+          tabBackgroundColor: AppColors.blueBase,
+          color: AppColors.grey,
+          tabs: const [
+            GButton(
+              icon: LineIcons.user,
+              text: 'Профиль',
+            ),
+            GButton(
+              icon: LineIcons.map,
+              text: 'Маршрут',
+            ),
+            GButton(
+              icon: LineIcons.bus,
+              text: 'Транспорт',
+            ),
+            GButton(
+              icon: LineIcons.bell,
+              text: 'Уведомления',
+            ),
+            GButton(
+              icon: LineIcons.alignJustify,
+              text: 'Еще',
+            ),
+          ],
+          selectedIndex: _selectedIndex,
+          onTabChange: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
         ),
       ),
     );

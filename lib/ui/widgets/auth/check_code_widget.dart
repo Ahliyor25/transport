@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:transport/ui/main_screen/main_screen.dart';
 
+import 'package:transport/ui/main_screen/profile_widget_modal.dart';
+
 import 'package:transport/ui/theme/app_colors.dart';
 
 class CheckCodeWidget extends StatelessWidget {
