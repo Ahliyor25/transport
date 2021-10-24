@@ -73,7 +73,7 @@ class AuthWidget extends StatelessWidget {
                     child: TextFormField(
                       keyboardType: TextInputType.phone,
                       autocorrect: false,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: AppColors.black,
                       ),
                       decoration: const InputDecoration(
